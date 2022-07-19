@@ -1,10 +1,15 @@
-import React from "react";
 import { Card } from "@ui5/webcomponents-react";
+import React from "react";
 
-export function MyApp() {
-    return
-    <div>
-        <Card>This is the content area of the Card</Card>
-    </div>
+function MyApp() {
+    return (
+        <div>
+            <Card>
+                This is the content area of the Card
+            </Card>
+        </div>
+    )
 
 }
+
+export default MyApp;
