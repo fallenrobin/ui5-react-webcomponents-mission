@@ -56,6 +56,9 @@ function MyApp() {
     const [loading, setLoading] = useState(false);
     const [toggleCharts, setToggleCharts] = useState("lineChart");
 
+    const contentTitle = toggleCharts === 'lineChart' ? 'Line Chart' : 'BarChart';
+    const switchToChart = toggleCharts === 'lineChart' ? 'Bar Chart' : 'Line Chart';
+
     const handleHeaderClick = () => {
         if (toggleCharts === "lineChart") {
             setLoading(true);
@@ -76,34 +79,40 @@ function MyApp() {
 
         <Card header={
             <CardHeader
-                titleText="Card"
+                titleText="Stock Prices"
+                subtitleText={`Click here to switch to ${switchToChart}`}
                 interactive
                 onClick={handleHeaderClick}
-                avatar={<Icon name=
-                    {toggleCharts ===
-                        "lineChart" ? "line-chart"
-                        :
-                        "horizontal-bar-chart"} />}
+                avatar={
+                    <Icon
+                        name={
+                            toggleCharts ===
+                                "lineChart" ? "line-chart"
+                                :
+                                "horizontal-bar-chart"
+                        }
+                    />
+                }
             />
         }
             style={{ width: "300px" }}
         >
             <Text style={spacing.sapUiContentPadding}>
-                This is the content area of the Card
+                {contentTitle}
             </Text>
             {toggleCharts === "lineChart" ? (
                 <LineChart
                     measures={[{ accessor: "month" }]}
                     dimensions={[{ accessor: "data", label: "Stock Price" }]}
                     dataset={dataset}
-                    loading= {loading}
+                    loading={loading}
                 />
             ) : (
                 <BarChart
                     dimensions={[{ accessor: "month" }]}
                     measures={[{ accessor: "data", label: "Stock Price" }]}
                     dataset={dataset}
-                    loading= {loading}
+                    loading={loading}
                 />
             )}
         </Card>
