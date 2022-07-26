@@ -51,7 +51,11 @@ function MyApp() {
     const [toggleCharts, setToggleCharts] = useState("lineChart");
 
     const handleHeaderClick = () => {
-        alert("Header clicked!")
+        if (toggleCharts === "lineChart") {
+            setToggleCharts("barChart");
+        } else {
+            setToggleCharts("lineChart");
+        }
     };
 
     return (
@@ -68,17 +72,19 @@ function MyApp() {
             <Text style={spacing.sapUiContentPadding}>
                 This is the content area of the Card
             </Text>
+            {toggleCharts === "lineChart" ?(
             <LineChart
                 measures={[{ accessor: "month" }]}
                 dimensions={[{ accessor: "data", label: "Stock Price" }]}
                 dataset={dataset}
             />
+            ) : (
             <BarChart
                 dimensions={[{ accessor: "month" }]}
                 measures={[{ accessor: "data", label: "Stock Price" }]}
                 dataset={dataset}
             />
-
+            )}
         </Card>
 
     )
