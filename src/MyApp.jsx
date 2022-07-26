@@ -1,7 +1,8 @@
 import {
     Card,
     Text,
-    CardHeader
+    CardHeader,
+    Icon
 }
     from "@ui5/webcomponents-react";
 import { spacing }
@@ -11,6 +12,10 @@ import {
     LineChart
 }
     from "@ui5/webcomponents-react-charts";
+import '@ui5/webcomponents-icons/dist/line-chart.js';
+import '@ui5/webcomponents-icons/dist/horizontal-bar-chart.js';
+
+
 
 import React, { useState } from "react";
 
@@ -48,13 +53,22 @@ const dataset = [
 
 function MyApp() {
 
+    const [loading, setLoading] = useState(false);
     const [toggleCharts, setToggleCharts] = useState("lineChart");
 
     const handleHeaderClick = () => {
         if (toggleCharts === "lineChart") {
-            setToggleCharts("barChart");
+            setLoading(true);
+            setTimeout(() => {
+                setLoading(false);
+                setToggleCharts("barChart");
+            }, 2000);
         } else {
-            setToggleCharts("lineChart");
+            setLoading(true);
+            setTimeout(() => {
+                setLoading(false);
+                setToggleCharts("lineChart");
+            }, 2000)
         }
     };
 
@@ -65,6 +79,11 @@ function MyApp() {
                 titleText="Card"
                 interactive
                 onClick={handleHeaderClick}
+                avatar={<Icon name=
+                    {toggleCharts ===
+                        "lineChart" ? "line-chart"
+                        :
+                        "horizontal-bar-chart"} />}
             />
         }
             style={{ width: "300px" }}
@@ -72,18 +91,20 @@ function MyApp() {
             <Text style={spacing.sapUiContentPadding}>
                 This is the content area of the Card
             </Text>
-            {toggleCharts === "lineChart" ?(
-            <LineChart
-                measures={[{ accessor: "month" }]}
-                dimensions={[{ accessor: "data", label: "Stock Price" }]}
-                dataset={dataset}
-            />
+            {toggleCharts === "lineChart" ? (
+                <LineChart
+                    measures={[{ accessor: "month" }]}
+                    dimensions={[{ accessor: "data", label: "Stock Price" }]}
+                    dataset={dataset}
+                    loading= {loading}
+                />
             ) : (
-            <BarChart
-                dimensions={[{ accessor: "month" }]}
-                measures={[{ accessor: "data", label: "Stock Price" }]}
-                dataset={dataset}
-            />
+                <BarChart
+                    dimensions={[{ accessor: "month" }]}
+                    measures={[{ accessor: "data", label: "Stock Price" }]}
+                    dataset={dataset}
+                    loading= {loading}
+                />
             )}
         </Card>
 
