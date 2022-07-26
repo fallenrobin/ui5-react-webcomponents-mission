@@ -1,13 +1,34 @@
-import { Card } from "@ui5/webcomponents-react";
+import {
+    Card,
+    Text,
+    CardHeader,
+
+}
+    from "@ui5/webcomponents-react";
+import { spacing }
+    from "@ui5/webcomponents-react-base";
 import React from "react";
 
 function MyApp() {
+
+const handleHeaderClick = () => {
+    alert("Header clicked!")
+};
+
     return (
-        <div>
-            <Card>
+
+        <Card header={
+            <CardHeader
+                titleText="Card"
+                interactive
+                onClick={handleHeaderClick}
+            />
+            }>
+            <Text style={spacing.sapUiContentPadding}>
                 This is the content area of the Card
-            </Card>
-        </div>
+            </Text>
+        </Card>
+
     )
 
 }

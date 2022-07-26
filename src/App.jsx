@@ -1,7 +1,7 @@
 import React from 'react';
-// import { MyApp } from './MyApp'; //
 import { ThemeProvider } from "@ui5/webcomponents-react";
 import MyApp from './MyApp';
+// import { MyApp } from './MyApp'; via tutorial; wrong way to import
 
 
 function App() {
