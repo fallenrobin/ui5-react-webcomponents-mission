@@ -137,113 +137,117 @@ function MyApp() {
             >
                 <ShellBarItem icon="add" text="Add" />
             </ShellBar>
-
-            <Card header={
-                <CardHeader
-                    titleText="Stock Prices"
-                    subtitleText={`Click here to switch to ${switchToChart}`}
-                    interactive
-                    onClick={handleHeaderClick}
-                    avatar={
-                        <Icon
-                            name={
-                                toggleCharts ===
-                                    "lineChart" ? "line-chart"
-                                    :
-                                    "horizontal-bar-chart"
-                            }
+            <FlexBox
+                justifyContent={FlexBoxJustifyContent.Center}
+                wrap={FlexBoxWrap.Wrap}
+                style={spacing.sapUiContentPadding}
+            >
+                <Card header={
+                    <CardHeader
+                        titleText="Stock Prices"
+                        subtitleText={`Click here to switch to ${switchToChart}`}
+                        interactive
+                        onClick={handleHeaderClick}
+                        avatar={
+                            <Icon
+                                name={
+                                    toggleCharts ===
+                                        "lineChart" ? "line-chart"
+                                        :
+                                        "horizontal-bar-chart"
+                                }
+                            />
+                        }
+                    />
+                }
+                    style={{ width: "300px", ...spacing.sapUiContentPadding }}
+                >
+                    <Text style={spacing.sapUiContentPadding}>
+                        {contentTitle}
+                    </Text>
+                    {toggleCharts === "lineChart" ? (
+                        <LineChart
+                            measures={[{ accessor: "month" }]}
+                            dimensions={[{ accessor: "data", label: "Stock Price" }]}
+                            dataset={dataset}
+                            loading={loading}
+                        />
+                    ) : (
+                        <BarChart
+                            dimensions={[{ accessor: "month" }]}
+                            measures={[{ accessor: "data", label: "Stock Price" }]}
+                            dataset={dataset}
+                            loading={loading}
+                        />
+                    )}
+                </Card>
+                <Card
+                    header={
+                        <CardHeader
+                            titleText="Progress"
+                            subtitleText="List"
+                            avatar={<Icon name="list" />}
                         />
                     }
-                />
-            }
-                style={{ width: "300px" }}
-            >
-                <Text style={spacing.sapUiContentPadding}>
-                    {contentTitle}
-                </Text>
-                {toggleCharts === "lineChart" ? (
-                    <LineChart
-                        measures={[{ accessor: "month" }]}
-                        dimensions={[{ accessor: "data", label: "Stock Price" }]}
-                        dataset={dataset}
-                        loading={loading}
+                    style={{ width: "300px", ...spacing.sapUiContentPadding }}
+                >
+                    <List>
+                        <StandardListItem
+                            additionalText="finished"
+                            additionalTextState={ValueState.Success}>
+                            Activity 1
+                        </StandardListItem>
+
+                        <StandardListItem
+                            additionalText="failed"
+                            additionalTextState={ValueState.Error}>
+                            Activity 2
+                        </StandardListItem>
+
+                        <StandardListItem
+                            additionalText="in progress"
+                            additionalTextState={ValueState.Warning}
+                            style={{ height: "80px" }}
+                        >
+                            <Title level={TitleLevel.H5}>
+                                Activity 3
+                            </Title>
+                            <ProgressIndicator
+                                value={89}
+                                valueState={ValueState.Success} />
+                        </StandardListItem>
+
+                        <StandardListItem
+                            additionalText="in progress"
+                            additionalTextState={ValueState.Warning}
+                            style={{ height: "80px" }}
+                        >
+                            <Title level={TitleLevel.H5}>
+                                Activity 4
+                            </Title>
+                            <ProgressIndicator
+                                value={5}
+                                valueState={ValueState.Error} />
+                        </StandardListItem>
+                    </List>
+
+                </Card>
+                <Card
+                    header={
+                        <CardHeader
+                            titleText="Analytical Table"
+                            avatar={<Icon name="table-view" />}
+                        />
+                    }
+                    style={{ maxWidth: "900px", ...spacing.sapUiContentPadding }}
+                >
+                    <AnalyticalTable
+                        data={tableData}
+                        columns={tableColumns}
+                        visibleRows={5}
                     />
-                ) : (
-                    <BarChart
-                        dimensions={[{ accessor: "month" }]}
-                        measures={[{ accessor: "data", label: "Stock Price" }]}
-                        dataset={dataset}
-                        loading={loading}
-                    />
-                )}
-            </Card>
-            <Card
-                header={
-                    <CardHeader
-                        titleText="Progress"
-                        subtitleText="List"
-                        avatar={<Icon name="list" />}
-                    />
-                }
-                style={{ width: "300px" }}
-            >
-                <List>
-                    <StandardListItem
-                        additionalText="finished"
-                        additionalTextState={ValueState.Success}>
-                        Activity 1
-                    </StandardListItem>
-
-                    <StandardListItem
-                        additionalText="failed"
-                        additionalTextState={ValueState.Error}>
-                        Activity 2
-                    </StandardListItem>
-
-                    <StandardListItem
-                        additionalText="in progress"
-                        additionalTextState={ValueState.Warning}
-                        style={{ height: "80px" }}
-                    >
-                        <Title level={TitleLevel.H5}>
-                            Activity 3
-                        </Title>
-                        <ProgressIndicator
-                            value={89}
-                            valueState={ValueState.Success} />
-                    </StandardListItem>
-
-                    <StandardListItem
-                        additionalText="in progress"
-                        additionalTextState={ValueState.Warning}
-                        style={{ height: "80px" }}
-                    >
-                        <Title level={TitleLevel.H5}>
-                            Activity 4
-                        </Title>
-                        <ProgressIndicator
-                            value={5}
-                            valueState={ValueState.Error} />
-                    </StandardListItem>
-                </List>
-
-            </Card>
-            <Card
-                header={
-                    <CardHeader
-                        titleText="Analytical Table"
-                        avatar={<Icon name="table-view" />}
-                    />
-                }
-                style={{ maxWidth: "900px" }}
-            >
-                <AnalyticalTable
-                    data={tableData}
-                    columns={tableColumns}
-                    visibleRows={5}
-                />
-            </Card>
-
+                </Card>
+            </FlexBox>
 
         </>
 
