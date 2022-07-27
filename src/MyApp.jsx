@@ -1,10 +1,24 @@
 import {
+    Avatar,
     Card,
-    Text,
     CardHeader,
+    Text,
+    ShellBar,
+    ShellBarItem,
+    List,
+    StandardListItem,
+    ValueState,
+    ProgressIndicator,
+    Title,
+    TitleLevel,
+    FlexBox,
+    FlexBoxJustifyContent,
+    FlexBoxWrap,
+    FlexBoxDirection,
+    AnalyticalTable,
     Icon
-}
-    from "@ui5/webcomponents-react";
+} from "@ui5/webcomponents-react";
+
 import { spacing }
     from "@ui5/webcomponents-react-base";
 import {
@@ -76,46 +90,53 @@ function MyApp() {
     };
 
     return (
-
-        <Card header={
-            <CardHeader
-                titleText="Stock Prices"
-                subtitleText={`Click here to switch to ${switchToChart}`}
-                interactive
-                onClick={handleHeaderClick}
-                avatar={
-                    <Icon
-                        name={
-                            toggleCharts ===
-                                "lineChart" ? "line-chart"
-                                :
-                                "horizontal-bar-chart"
-                        }
-                    />
-                }
+        <>
+            <ShellBar 
+            primaryTitle="My App" 
+            logo={<img src="https://st4.depositphotos.com/33133132/38031/v/1600/depositphotos_380310194-stock-illustration-creative-brain-logo-design-brainstorm.jpg"/>}
+            profile={<Avatar><img src="https://pusheen.com/wp-content/uploads/2020/12/What-Sweet-Quiz-SocialResults_Donut-1-e1608220861325.jpg"/></Avatar>}
             />
-        }
-            style={{ width: "300px" }}
-        >
-            <Text style={spacing.sapUiContentPadding}>
-                {contentTitle}
-            </Text>
-            {toggleCharts === "lineChart" ? (
-                <LineChart
-                    measures={[{ accessor: "month" }]}
-                    dimensions={[{ accessor: "data", label: "Stock Price" }]}
-                    dataset={dataset}
-                    loading={loading}
+
+            <Card header={
+                <CardHeader
+                    titleText="Stock Prices"
+                    subtitleText={`Click here to switch to ${switchToChart}`}
+                    interactive
+                    onClick={handleHeaderClick}
+                    avatar={
+                        <Icon
+                            name={
+                                toggleCharts ===
+                                    "lineChart" ? "line-chart"
+                                    :
+                                    "horizontal-bar-chart"
+                            }
+                        />
+                    }
                 />
-            ) : (
-                <BarChart
-                    dimensions={[{ accessor: "month" }]}
-                    measures={[{ accessor: "data", label: "Stock Price" }]}
-                    dataset={dataset}
-                    loading={loading}
-                />
-            )}
-        </Card>
+            }
+                style={{ width: "300px" }}
+            >
+                <Text style={spacing.sapUiContentPadding}>
+                    {contentTitle}
+                </Text>
+                {toggleCharts === "lineChart" ? (
+                    <LineChart
+                        measures={[{ accessor: "month" }]}
+                        dimensions={[{ accessor: "data", label: "Stock Price" }]}
+                        dataset={dataset}
+                        loading={loading}
+                    />
+                ) : (
+                    <BarChart
+                        dimensions={[{ accessor: "month" }]}
+                        measures={[{ accessor: "data", label: "Stock Price" }]}
+                        dataset={dataset}
+                        loading={loading}
+                    />
+                )}
+            </Card>
+        </>
 
     )
 
