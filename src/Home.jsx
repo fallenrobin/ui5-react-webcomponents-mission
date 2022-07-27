@@ -27,6 +27,7 @@ import {
 import '@ui5/webcomponents-icons/dist/line-chart.js';
 import '@ui5/webcomponents-icons/dist/horizontal-bar-chart.js';
 import { useNavigate } from "react-router-dom";
+import MyCustomElement from './MyCustomElement';
 
 
 
@@ -128,6 +129,7 @@ function Home() {
             wrap={FlexBoxWrap.Wrap}
             style={spacing.sapUiContentPadding}
         >
+            <MyCustomElement />
             <Card header={
                 <CardHeader
                     titleText="Stock Prices"
@@ -172,7 +174,7 @@ function Home() {
                     <CardHeader
                         titleText="Progress"
                         subtitleText="List"
-                        avatar={<Icon name="list"/>}
+                        avatar={<Icon name="list" />}
                         interactive
                         onClick={handleProgressHeaderClick}
                     />
