@@ -26,6 +26,7 @@ import {
     from "@ui5/webcomponents-react-charts";
 import '@ui5/webcomponents-icons/dist/line-chart.js';
 import '@ui5/webcomponents-icons/dist/horizontal-bar-chart.js';
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -114,6 +115,12 @@ function Home() {
         }
     };
 
+    const navigate = useNavigate();
+    const handleProgressHeaderClick = () => {
+        navigate("/detail");
+    };
+
+
 
     return (
         <FlexBox
@@ -165,7 +172,9 @@ function Home() {
                     <CardHeader
                         titleText="Progress"
                         subtitleText="List"
-                        avatar={<Icon name="list" />}
+                        avatar={<Icon name="list"/>}
+                        interactive
+                        onClick={handleProgressHeaderClick}
                     />
                 }
                 style={{ width: "300px", ...spacing.sapUiContentPadding }}

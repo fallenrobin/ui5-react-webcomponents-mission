@@ -2,7 +2,7 @@
 import React from "react";
 import { Avatar, ShellBar, ShellBarItem } from "@ui5/webcomponents-react";
 import "@ui5/webcomponents-icons/dist/add.js";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import Home from "./Home";
 import Detail from "./Detail";
 
@@ -10,6 +10,10 @@ import Detail from "./Detail";
 
 function MyApp() {
 
+const navigate = useNavigate();
+const handleLogoClick = () => {
+  navigate("./");
+};
 
 
     return (
@@ -20,6 +24,7 @@ function MyApp() {
                 profile={<Avatar>
                     <img src="https://pusheen.com/wp-content/uploads/2020/12/What-Sweet-Quiz-SocialResults_Donut-1-e1608220861325.jpg" />
                 </Avatar>}
+                onLogoClick={handleLogoClick}
             >
                 <ShellBarItem icon="add" text="Add" />
             </ShellBar>
