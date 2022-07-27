@@ -20,6 +20,8 @@ import {
 } from "@ui5/webcomponents-react";
 import "@ui5/webcomponents-icons/dist/add.js";
 import "@ui5/webcomponents-icons/dist/list.js";
+import "@ui5/webcomponents-icons/dist/table-view.js";
+
 
 
 
@@ -67,6 +69,37 @@ const dataset = [
         data: 40
     }
 ];
+
+const tableData = new Array(500).fill(null).map((_, index) => {
+    return {
+        name: `name${index}`,
+        age: Math.floor(Math.random() * 100),
+        friend: {
+            name: `friend.Name${index}`,
+            age: Math.floor(Math.random() * 100)
+        }
+    };
+});
+
+const tableColumns = [
+    {
+        Header: "Name",
+        accessor: "name" // String-based value accessors!
+    },
+    {
+        Header: "Age",
+        accessor: "age"
+    },
+    {
+        Header: "Friend Name",
+        accessor: "friend.name"
+    },
+    {
+        Header: "Friend Age",
+        accessor: "friend.age"
+    }
+];
+
 
 
 function MyApp() {
@@ -155,26 +188,62 @@ function MyApp() {
                 style={{ width: "300px" }}
             >
                 <List>
-                    <StandardListItem additionalText="finished" additionalTextState={ValueState.Success}>
+                    <StandardListItem
+                        additionalText="finished"
+                        additionalTextState={ValueState.Success}>
                         Activity 1
                     </StandardListItem>
 
-                    <StandardListItem additionalText="failed" additionalTextState={ValueState.Error}>
+                    <StandardListItem
+                        additionalText="failed"
+                        additionalTextState={ValueState.Error}>
                         Activity 2
                     </StandardListItem>
 
-                    <StandardListItem additionalText="in progress" additionalTextState={ValueState.Warning}>
-                        <Title level={TitleLevel.H5}>Activity 3</Title>
-                        <ProgressIndicator value={89} valueState={ValueState.Success} />
+                    <StandardListItem
+                        additionalText="in progress"
+                        additionalTextState={ValueState.Warning}
+                        style={{ height: "80px" }}
+                    >
+                        <Title level={TitleLevel.H5}>
+                            Activity 3
+                        </Title>
+                        <ProgressIndicator
+                            value={89}
+                            valueState={ValueState.Success} />
                     </StandardListItem>
 
-                    <StandardListItem additionalText="in progress" additionalTextState={ValueState.Warning}>
-                        <Title level={TitleLevel.H5}>Activity 4</Title>
-                        <ProgressIndicator value={5} valueState={ValueState.Error} />
+                    <StandardListItem
+                        additionalText="in progress"
+                        additionalTextState={ValueState.Warning}
+                        style={{ height: "80px" }}
+                    >
+                        <Title level={TitleLevel.H5}>
+                            Activity 4
+                        </Title>
+                        <ProgressIndicator
+                            value={5}
+                            valueState={ValueState.Error} />
                     </StandardListItem>
                 </List>
 
             </Card>
+            <Card
+                header={
+                    <CardHeader
+                        titleText="Analytical Table"
+                        avatar={<Icon name="table-view" />}
+                    />
+                }
+                style={{ maxWidth: "900px" }}
+            >
+                <AnalyticalTable
+                    data={tableData}
+                    columns={tableColumns}
+                    visibleRows={5}
+                />
+            </Card>
+
 
         </>
 
